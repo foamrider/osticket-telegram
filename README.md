@@ -5,9 +5,9 @@ An plugin for [osTicket](https://osticket.com) which posts notifications to a [T
 Install
 --------
 Clone this repo or download the zip file and place the contents into your `include/plugins` folder.
-Insert Telegrams Bot URL for your bot (ex. https://api.telegram.org/bot<token>/) and Chat ID.
+Insert Telegrams Bot URL for your bot (ex. `https://api.telegram.org/bot<token>/`) and Chat ID.
 
-For more information about Telegram Bot, see: [Link](https://core.telegram.org/bots/api)
+For more information about Telegram Bot, see: https://core.telegram.org/bots/api
 
 Info
 ------
