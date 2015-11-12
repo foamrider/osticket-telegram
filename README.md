@@ -13,4 +13,4 @@ Info
 ------
 This plugin uses CURL and tested on osTicket-1.9.
 
-Based on [thammanna/osticket](https://github.com/thammanna/osticket-slack)
+Based on [thammanna/osticket-slack](https://github.com/thammanna/osticket-slack)
