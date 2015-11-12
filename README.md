@@ -12,3 +12,5 @@ For more information about Telegram Bot, see: https://core.telegram.org/bots/api
 Info
 ------
 This plugin uses CURL and tested on osTicket-1.9.
+
+Based on [thammanna/osticket](https://github.com/thammanna/osticket-slack)
