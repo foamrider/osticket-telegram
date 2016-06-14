@@ -24,11 +24,15 @@ class TelegramPlugin extends Plugin {
 
 			$data_string = utf8_encode(json_encode($payload));
 			$url = $this->getConfig()->get('telegram-webhook-url');
+			$url = $url . "/senMessage"; // Avoid HTTP 502 error on post, If command not defined on the URL.
 
 			$ch = curl_init($url);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POST, 1);
+			//curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);  // Enable redirection
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // Avoid errors on SSL (only if needed)			
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 				'Content-Type: application/json',
 				'Content-Length: ' . strlen($data_string))
