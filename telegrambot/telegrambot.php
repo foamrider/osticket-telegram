@@ -21,9 +21,12 @@ class TelegramPlugin extends Plugin {
 		$chatid = $this->getConfig()->get('telegram-chat-id');
         if ($this->getConfig()->get('telegram-include-body')) {
             $body = $ticket->getLastMessage()->getMessage() ?: 'No content';
-            $body = strip_tags($body, '<br>');
+			$body = str_replace('<p>', '', $body);
+			$body = str_replace('</p>', '<br />' , $body);
 			$breaks = array("<br />","<br>","<br/>");
 			$body = str_ireplace($breaks, "\n", $body);
+			$body = preg_replace('/\v(?:[\v\h]+)/', '', $body);
+            $body = strip_tags($body);
         }
 
 		$this->sendToTelegram(
