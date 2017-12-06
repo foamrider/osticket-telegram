@@ -19,12 +19,18 @@ class TelegramPlugin extends Plugin {
         $title = $ticket->getSubject() ?: 'No subject';
 		$createdBy = $ticket->getName()." (".$ticket->getEmail().")";
 		$chatid = $this->getConfig()->get('telegram-chat-id');
+        if ($this->getConfig()->get('telegram-include-body')) {
+            $body = $ticket->getLastMessage()->getMessage() ?: 'No content';
+            $body = strip_tags($body, '<br>');
+			$breaks = array("<br />","<br>","<br/>");
+			$body = str_ireplace($breaks, "\n", $body);
+        }
 
 		$this->sendToTelegram(
 			array(
 				"method" => "sendMessage",
 				"chat_id" => $chatid,
-				"text" => "<b>New Ticket:</b> <a href=\"".$ticketLink."\">#".$ticketId."</a>\n<b>Subject:</b> ".$title."\n<b>Created by:</b> ".$createdBy,
+				"text" => "<b>New Ticket:</b> <a href=\"".$ticketLink."\">#".$ticketId."</a>\n<b>Created by:</b> ".$createdBy."\n<b>Subject:</b> ".$title.($body?"\n<b>Message:</b>\n".$body:''),
 				"parse_mode" => "html",
 				"disable_web_page_preview" => "True"
 			)
@@ -74,4 +80,3 @@ class TelegramPlugin extends Plugin {
         return $text;
     }
 }
-

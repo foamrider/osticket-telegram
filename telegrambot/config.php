@@ -16,6 +16,10 @@ class TelegramPluginConfig extends PluginConfig {
                 'label' => 'Chat ID',
                 'configuration' => array('size'=>100, 'length'=>200),
             )),
+            'telegram-include-body' => new BooleanField(array(
+                'label' => 'Include Body',
+                'default' => 0,
+            )),
         );
     }
 }
